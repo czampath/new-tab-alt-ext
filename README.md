@@ -34,23 +34,6 @@ A Chrome extension that allows you to override the new tab page with any custom 
 3. Click "Save Settings"
 4. Open a new tab to see your custom page!
 
-## Examples
-
-### Use Your Custom HTML Page
-```
-file:///D:/Cosmos/CodeSpace/HTML/new-tab-alt/index.html
-```
-
-### Use a Local Development Server
-```
-http://localhost:3000
-```
-
-### Use Another Website
-```
-https://www.google.com
-```
-
 ### Reset to Chrome Default
 Leave the URL field empty and click "Save Settings"
 
