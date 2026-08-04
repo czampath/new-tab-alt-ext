@@ -19,21 +19,40 @@ function renderRedirectList(rules) {
     rules.forEach((rule, index) => {
         const item = document.createElement('div');
         item.className = 'redirect-item';
-        item.innerHTML = `
-            <input type="text" placeholder="From URL (e.g., https://example.com)" value="${rule.from || ''}" data-index="${index}" data-field="from">
-            <div class="arrow">→</div>
-            <input type="text" placeholder="To URL (e.g., https://newsite.com)" value="${rule.to || ''}" data-index="${index}" data-field="to">
-            <button data-index="${index}" class="remove-btn">Remove</button>
-        `;
-        container.appendChild(item);
-    });
-    
-    // Attach event listeners
-    container.querySelectorAll('.remove-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            const index = parseInt(e.target.dataset.index);
-            removeRedirectRule(index);
+
+        const fromInput = document.createElement('input');
+        fromInput.type = 'text';
+        fromInput.placeholder = 'From URL (e.g., https://example.com)';
+        fromInput.value = rule.from || '';
+        fromInput.dataset.index = String(index);
+        fromInput.dataset.field = 'from';
+
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow';
+        arrow.textContent = '\u2192';
+
+        const toInput = document.createElement('input');
+        toInput.type = 'text';
+        toInput.placeholder = 'To URL (e.g., https://newsite.com)';
+        toInput.value = rule.to || '';
+        toInput.dataset.index = String(index);
+        toInput.dataset.field = 'to';
+
+        const removeButton = document.createElement('button');
+        removeButton.className = 'remove-btn';
+        removeButton.dataset.index = String(index);
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', (e) => {
+            const button = e.currentTarget;
+            const removeIndex = Number.parseInt(button.dataset.index, 10);
+            removeRedirectRule(removeIndex);
         });
+
+        item.appendChild(fromInput);
+        item.appendChild(arrow);
+        item.appendChild(toInput);
+        item.appendChild(removeButton);
+        container.appendChild(item);
     });
 }
 
@@ -70,7 +89,7 @@ document.getElementById('saveBtn').addEventListener('click', () => {
     const ruleMap = {};
     
     redirectInputs.forEach(input => {
-        const index = parseInt(input.dataset.index);
+        const index = Number.parseInt(input.dataset.index, 10);
         const field = input.dataset.field;
         
         if (!ruleMap[index]) {

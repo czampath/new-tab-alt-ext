@@ -15,6 +15,7 @@ A Chrome extension that allows you to override the new tab page with any custom 
 - ✅ Leave empty to use default Chrome new tab
 - ✅ Simple and clean options page
 - ✅ Works around organization-enforced new tab policies
+- ✅ Hardened input handling with strict URL protocol validation and DOM-safe rendering
 
 ## Installation
 

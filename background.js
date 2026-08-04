@@ -1,4 +1,27 @@
 // Set default URL when extension is first installed
+const ALLOWED_PROTOCOLS = new Set([
+    'https:',
+    'http:',
+    'file:',
+    'ftp:',
+    'urn:',
+    'chrome-extension:',
+    'chrome:'
+]);
+
+function isValidCustomUrl(url) {
+    if (!url) {
+        return false;
+    }
+
+    try {
+        const parsedUrl = new URL(url);
+        return ALLOWED_PROTOCOLS.has(parsedUrl.protocol);
+    } catch {
+        return false;
+    }
+}
+
 chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
         // Set default custom URL on first install
@@ -17,10 +40,7 @@ chrome.tabs.onCreated.addListener((tab) => {
             const customUrl = result.customUrl ? result.customUrl.trim() : '';
             
             if (customUrl) {
-                const validPrefixes = ['https://', 'http://', 'file://', 'ftp://', 'urn:', 'chrome-extension://', 'chrome://'];
-                const isValidUrl = validPrefixes.some(prefix => customUrl.startsWith(prefix));
-                
-                if (isValidUrl) {
+                if (isValidCustomUrl(customUrl)) {
                     // Update tab URL immediately
                     chrome.tabs.update(tab.id, { url: customUrl });
                 }
@@ -40,7 +60,7 @@ chrome.webNavigation.onBeforeNavigate.addListener((details) => {
             for (const rule of redirectRules) {
                 if (rule.from && rule.to) {
                     // Check for exact match or wildcard match
-                    if (urlMatches(details.url, rule.from)) {
+                    if (urlMatches(details.url, rule.from) && isValidCustomUrl(rule.to) && details.url !== rule.to) {
                         // Redirect to the target URL
                         chrome.tabs.update(details.tabId, { url: rule.to });
                         break;
