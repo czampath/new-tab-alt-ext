@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Override New Tab",
+  "name": "New Tab Override",
   "version": "1.1",
   "description": "Override Chrome's new tab policy. Set a custom URL for new tabs or use a local file.",
   "permissions": [

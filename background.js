@@ -26,7 +26,7 @@ chrome.runtime.onInstalled.addListener((details) => {
     if (details.reason === 'install') {
         // Set default custom URL on first install
         chrome.storage.sync.set({
-            customUrl: 'https://czampath.github.io/new-tab-alt/',
+            customUrl: 'https://bytedeck.dev',
             redirectRules: []
         });
     }

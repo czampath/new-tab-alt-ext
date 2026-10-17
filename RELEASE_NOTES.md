@@ -27,7 +27,7 @@ This release focuses on security improvements while preserving existing behavior
 
 🎉 **New Tab Override**
 - Override Chrome's default new tab page with your custom URL
-- Preset to https://czampath.github.io/new-tab-alt/ by default
+- Preset to https://bytedeck.dev by default
 - Support for all URL types: https://, http://, file://, chrome://, chrome-extension://
 
 🔀 **URL Redirects**

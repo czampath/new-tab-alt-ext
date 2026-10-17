@@ -1,4 +1,4 @@
-# Override New Tab - Chrome Extension
+# New Tab Override - Chrome Extension
 
 A Chrome extension that allows you to override the new tab page with any custom URL, bypassing organization policies.
 

@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     chrome.storage.sync.get(['customUrl', 'redirectRules'], (result) => {
         // Set default URL if not already set
-        const customUrl = result.customUrl !== undefined ? result.customUrl : 'https://czampath.github.io/new-tab-alt/';
+        const customUrl = result.customUrl !== undefined ? result.customUrl : 'https://bytedeck.dev';
         document.getElementById('customUrl').value = customUrl;
         
         // Load redirect rules
